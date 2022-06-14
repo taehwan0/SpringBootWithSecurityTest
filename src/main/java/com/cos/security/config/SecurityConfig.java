@@ -2,11 +2,16 @@ package com.cos.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
+// secureEnabled -> Secured 어노테이션 활성화 -> Controller 개별적으로 필요 ROLE 구현 가능
+// prePostEnabled -> PreAuthorize 어노테이션 활성화 -> 위와 동일하나 Role 문법 사용하며, 다중 Role 구현 가능
+// configure Override 를 통한 구현으로 글로벌 활성화 하는 방식을 권장함
 @EnableWebSecurity // 스프링 시큐리티 필터가 스프링 필터체인에 등록됨
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
